@@ -43,18 +43,6 @@ app.get('/api/alltrips', async (req, res) => {
 		if (trips.length === 0) {
 			return res.status(404).send({ err: `No trips were found, try again!` });
 		}
-		Potatoes.aggregate([
-			{
-				$addFields: {
-					date: {
-						$dateToString: {
-							format: '%Y-%m-%d',
-							date: '$date',
-						},
-					},
-				},
-			},
-		]);
 		res.json(trips);
 	} catch (err) {
 		console.error(err);
